@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | Portal Pericial</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <header class="bg-white shadow p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">Dashboard</h1>
+    <a href="login.html" class="text-blue-600 hover:underline">Sair</a>
+  </header>
+
+  <main class="p-6 space-y-6">
+    <!-- Filtros -->
+    <section class="bg-white p-4 rounded shadow">
+      <h2 class="text-lg font-semibold mb-4">Filtros</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <input type="date" class="w-full border p-2 rounded" placeholder="Data" />
+        <input type="text" class="w-full border p-2 rounded" placeholder="Local" />
+        <select class="w-full border p-2 rounded">
+          <option value="">Tipo de Caso</option>
+          <option>Criminal</option>
+          <option>Civil</option>
+          <option>Trabalhista</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Cards de Casos -->
+    <section class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white p-4 rounded shadow">
+        <h3 class="font-bold text-lg">Caso 001</h3>
+        <p class="text-gray-600">Tipo: Criminal</p>
+        <p class="text-gray-600">Local: São Paulo</p>
+        <p class="text-gray-600">Data: 2024-12-01</p>
+        <a href="casos.html" class="text-blue-600 hover:underline">Ver detalhes</a>
+      </div>
+      <!-- Outros cards podem ser adicionados aqui -->
+    </section>
+  </main>
+</body>
+</html>
