@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Caso</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-4" id="titulo-caso">Carregando título...</h2>
+    <p class="mb-4" id="resumo-caso">Resumo do caso...</p>
+    <h3 class="text-xl font-semibold mb-2">Laudo:</h3>
+    <p id="laudo-caso">Carregando laudo...</p>
+    <h3 class="text-xl font-semibold mb-2 mt-4">Evidências:</h3>
+    <div id="evidencias-caso">
+      <p>Carregando evidências...</p>
+    </div>
+  </div>
+
+  <script>
+    // Função para pegar o ID da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const casoId = urlParams.get('id');
+
+    // Função para carregar os dados do caso (simulação com dados estáticos)
+    function carregarDetalhesCaso(id) {
+      // Aqui você pode substituir por uma requisição real ou um objeto com os dados
+      const casos = {
+        1: {
+          titulo: 'Caso 1',
+          resumo: 'Resumo detalhado do caso 1.',
+          laudo: 'Laudo completo do caso 1...',
+          evidencias: ['Evidência 1', 'Evidência 2', 'Evidência 3']
+        },
+        2: {
+          titulo: 'Caso 2',
+          resumo: 'Resumo detalhado do caso 2.',
+          laudo: 'Laudo completo do caso 2...',
+          evidencias: ['Evidência A', 'Evidência B']
+        }
+      };
+
+      const caso = casos[id];
+
+      if (caso) {
+        document.getElementById('titulo-caso').textContent = caso.titulo;
+        document.getElementById('resumo-caso').textContent = caso.resumo;
+        document.getElementById('laudo-caso').textContent = caso.laudo;
+        
+        const evidenciasContainer = document.getElementById('evidencias-caso');
+        evidenciasContainer.innerHTML = '';
+        caso.evidencias.forEach(evidencia => {
+          const p = document.createElement('p');
+          p.textContent = evidencia;
+          evidenciasContainer.appendChild(p);
+        });
+      } else {
+        document.getElementById('titulo-caso').textContent = 'Caso não encontrado';
+      }
+    }
+
+    // Carregar os detalhes do caso
+    carregarDetalhesCaso(casoId);
+  </script>
+</body>
+</html>
