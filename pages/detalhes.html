@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Caso</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-4" id="titulo-caso">Carregando título...</h2>
+    <p class="mb-4" id="resumo-caso">Resumo do caso...</p>
+    <h3 class="text-xl font-semibold mb-2">Laudo:</h3>
+    <p id="laudo-caso">Carregando laudo...</p>
+    <h3 class="text-xl font-semibold mb-2 mt-4">Evidências:</h3>
+    <div id="evidencias-caso">
+      <p>Carregando evidências...</p>
+    </div>
+  </div>
+
+  <script>
+    // Função para pegar o ID da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const casoId = urlParams.get('id');
+
+    // Função para carregar os dados do caso da API
+    async function carregarDetalhesCaso(id) {
+      try {
+        const response = await fetch(`http://localhost:3000/api/casos/${id}`);
+        if (response.ok) {
+          const caso = await response.json();
+          
+          document.getElementById('titulo-caso').textContent = caso.titulo;
+          document.getElementById('resumo-caso').textContent = caso.resumo;
+          document.getElementById('laudo-caso').textContent = caso.laudo;
+          
+          const evidenciasContainer = document.getElementById('evidencias-caso');
+          evidenciasContainer.innerHTML = '';
+          caso.evidencias.forEach(evidencia => {
+            const p = document.createElement('p');
+            p.textContent = evidencia;
+            evidenciasContainer.appendChild(p);
+          });
+        } else {
+          document.getElementById('titulo-caso').textContent = 'Caso não encontrado';
+        }
+      } catch (error) {
+        console.error('Erro ao carregar os detalhes do caso:', error);
+        document.getElementById('titulo-caso').textContent = 'Erro ao carregar dados';
+      }
+    }
+
+    // Carregar os detalhes do caso
+    carregarDetalhesCaso(casoId);
+  </script>
+</body>
+</html>
